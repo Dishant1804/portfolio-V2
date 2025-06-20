@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { FiArrowUpRight, FiGitPullRequest, FiGitMerge, FiX } from "react-icons/fi";
+import blacklist from '@/data/blacklistrepo';
+import blacklistPRs from '@/data/blacklistPRs';
 
 const PullRequests = () => {
   const [pullRequests, setPullRequests] = useState([]);
@@ -44,10 +46,13 @@ const PullRequests = () => {
     fetchPullRequests();
   }, []);
 
-  const blacklist = ['pksagar0512/ITB_Assignment', 'OctoTechHub/studysource'];
-
   const filteredPRs = pullRequests.filter(pr => {
     if (blacklist.includes(pr.repository.full_name)) return false;
+
+    if (blacklistPRs.some(item =>
+      item.repo === pr.repository.full_name && item.number === pr.number
+    )) return false;
+
     if (filter === 'all') return true;
     return pr.state === filter;
   });
@@ -105,7 +110,7 @@ const PullRequests = () => {
 
   return (
     <div id="contributions" className="flex flex-col items-center w-full justify-between text-left gap-6 px-10">
-      <h1 className="tracking-tight underline items-start w-full text-xl font-semibold">Contributions</h1>
+      <h1 className="tracking-tight underline items-start w-full text-xl font-semibold">Some contributions</h1>
 
       <div className="flex flex-wrap items-start w-full gap-6">
         <button
@@ -113,21 +118,38 @@ const PullRequests = () => {
           className={`px-2 py-1 text-sm border border-primary w-fit hover:bg-secondary ${filter === 'all' ? 'bg-secondary text-primary' : 'text-primary'
             }`}
         >
-          All ({pullRequests.filter(pr => !blacklist.includes(pr.repository.full_name)).length})
+          All ({pullRequests.filter(pr =>
+            !blacklist.includes(pr.repository.full_name) &&
+            !blacklistPRs.some(item =>
+              item.repo === pr.repository.full_name && item.number === pr.number
+            )
+          ).length})
         </button>
         <button
           onClick={() => setFilter('open')}
           className={`px-2 py-1 text-sm border border-primary w-fit hover:bg-secondary ${filter === 'open' ? 'bg-secondary text-primary' : 'text-primary'
             }`}
         >
-          Open ({pullRequests.filter(pr => !blacklist.includes(pr.repository.full_name) && pr.state === 'open').length})
+          Open ({pullRequests.filter(pr =>
+            !blacklist.includes(pr.repository.full_name) &&
+            !blacklistPRs.some(item =>
+              item.repo === pr.repository.full_name && item.number === pr.number
+            ) &&
+            pr.state === 'open'
+          ).length})
         </button>
         <button
           onClick={() => setFilter('closed')}
           className={`px-2 py-1 text-sm border border-primary w-fit hover:bg-secondary ${filter === 'closed' ? 'bg-secondary text-primary' : 'text-primary'
             }`}
         >
-          Closed ({pullRequests.filter(pr => !blacklist.includes(pr.repository.full_name) && pr.state === 'closed').length})
+          Closed ({pullRequests.filter(pr =>
+            !blacklist.includes(pr.repository.full_name) &&
+            !blacklistPRs.some(item =>
+              item.repo === pr.repository.full_name && item.number === pr.number
+            ) &&
+            pr.state === 'closed'
+          ).length})
         </button>
       </div>
 

@@ -6,7 +6,7 @@ import { Divider } from "./ui/divider";
 
 const Header = () => {
 
-  const scrollToProject = ({id}) => {
+  const scrollToProject = ({ id }) => {
     const projectElement = document.getElementById(id);
     if (projectElement) {
       projectElement.scrollIntoView({ behavior: 'smooth' });
@@ -16,9 +16,9 @@ const Header = () => {
     <>
       <header className="flex flex-col gap-16 text-justify justify-evenly">
         <nav className="flex flex-row gap-4 px-10">
-          <h3 className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer" onClick={()=> scrollToProject({id: 'blog'})}>Blogs</h3>//
-          <h3 className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer" onClick={()=> scrollToProject({id: 'project'})} >Projects</h3> //
-          <h3 className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer" onClick={() =>{scrollToProject({id : 'contributions'})}}>Contributions</h3>
+          <h3 className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer" onClick={() => scrollToProject({ id: 'blog' })}>Blogs</h3>//
+          <h3 className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer" onClick={() => scrollToProject({ id: 'project' })} >Projects</h3> //
+          <h3 className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer" onClick={() => { scrollToProject({ id: 'contributions' }) }}>Contributions</h3>
         </nav>
 
         <Divider />
@@ -27,7 +27,9 @@ const Header = () => {
           <div className="flex w-full justify-between items-center">
             <div className="flex flex-col gap-6">
               <h1 className="tracking-tight underline text-xl font-semibold">About</h1>
-              <h1 className="tracking-tight text-lg">Dishant Miyani</h1>
+              <div className="flex flex-col">
+                <h1 className="tracking-tight text-lg">Dishant Miyani</h1>
+              </div>
             </div>
             <Image
               src="/profile.jpeg"
@@ -65,6 +67,14 @@ const Header = () => {
               target="_blank"
             >
               linkedIn
+            </Link>
+            //
+            <Link
+              className="underline text-[var(--blue-color)] underline-offset-4"
+              href="mailto:dishantmiyai1804@gmail.com"
+              target="_blank"
+            >
+              mail
             </Link>
           </div>
           <div className="flex flex-wrap">
