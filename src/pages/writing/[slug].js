@@ -91,7 +91,7 @@ export default function BlogPost({ post, prevPost, nextPost }) {
           <Divider />
 
           <div className="flex flex-col gap-4 py-14">
-            <h1 className="px-10 text-4xl font-semibold text-[var(--blue-color)] ">
+            <h1 className="px-10 text-2xl sm:text-4xl font-semibold text-[var(--blue-color)] ">
               {post.title}
             </h1>
 
@@ -157,11 +157,10 @@ export default function BlogPost({ post, prevPost, nextPost }) {
       {/* scroll to top button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-4 right-4 w-10 h-10 transition-all duration-300 ease-in-out bg-zinc-900 rounded-full text-white text-center justify-center flex-col items-center flex ${
-          showButton
+        className={`fixed bottom-4 right-4 w-10 h-10 transition-all duration-300 ease-in-out bg-zinc-900 rounded-full text-white text-center justify-center flex-col items-center flex ${showButton
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10 pointer-events-none"
-        }`}
+          }`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -213,15 +212,15 @@ export async function getStaticProps({ params }) {
       },
       prevPost: prevPost
         ? {
-            title: prevPost.title,
-            slug: prevPost.slug,
-          }
+          title: prevPost.title,
+          slug: prevPost.slug,
+        }
         : null,
       nextPost: nextPost
         ? {
-            title: nextPost.title,
-            slug: nextPost.slug,
-          }
+          title: nextPost.title,
+          slug: nextPost.slug,
+        }
         : null,
     },
   };

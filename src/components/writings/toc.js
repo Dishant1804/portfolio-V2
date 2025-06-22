@@ -6,24 +6,24 @@ export function TableOfContents({ headings = [] }) {
   }
 
   return (
-    <div type="single" collapsible className="w-full p-0 ">
-      <div value="toc" className="border-b px-10 py-10 ">
+    <div type="single" collapsible className="w-full p-0">
+      <div value="toc" className="border-b px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
         <div className="p-0">
-          <h2 className="font-medium">Table of Contents</h2>
+          <h2 className="font-medium text-sm sm:text-base">Table of Contents</h2>
         </div>
         <div>
-          <nav className="flex flex-col space-y-2 mt-4">
+          <nav className="flex flex-col space-y-1 sm:space-y-2 mt-3 sm:mt-4">
             {headings.map((heading) => (
               <Link
                 key={heading.id}
                 href={`#${heading.id}`}
-                className={`text-muted-foreground hover:text-foreground transition-colors  ${
+                className={`text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-base ${
                   heading.level === 2
-                    ? "pl-4"
+                    ? "pl-2 sm:pl-4"
                     : heading.level === 3
-                    ? "pl-8"
+                    ? "pl-4 sm:pl-8"
                     : heading.level === 4
-                    ? "pl-12"
+                    ? "pl-6 sm:pl-12"
                     : ""
                 }`}
               >

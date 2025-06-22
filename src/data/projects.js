@@ -56,7 +56,7 @@ const projects = [
   {
     title: "Socket chat",
     category : ["fun"],
-    description: "Socket programming implementation(TCP protocol)",
+    description: "Socket Programming using TCP/IP",
     link: "https://github.com/Dishant1804/socket-chat",
   },
   {

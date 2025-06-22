@@ -15,49 +15,49 @@ const Projects = () => {
 
   const filteredProjects = filterProjects(selectedCategory);
 
-  return <div id="project" className="flex flex-col items-center w-full justify-between text-left gap-6 px-10">
-    <h1 className="tracking-tight underline items-start w-full text-xl font-semibold">Projects</h1>
-    <div className="flex flex-wrap items-start w-full gap-6">
+  return <div id="project" className="flex flex-col items-center w-full justify-between text-left gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10">
+    <h1 className="tracking-tight underline items-start w-full text-lg sm:text-xl font-semibold">Projects</h1>
+    <div className="flex flex-wrap items-start w-full gap-2 sm:gap-4 lg:gap-6">
       <div 
-        className={`px-2 py-1 text-sm border border-primary text-primary w-fit hover:bg-secondary cursor-pointer ${selectedCategory === "all" ? "bg-secondary" : ""}`}
+        className={`px-2 py-1 text-xs sm:text-sm border border-primary text-primary w-fit hover:bg-secondary cursor-pointer ${selectedCategory === "all" ? "bg-secondary" : ""}`}
         onClick={() => setSelectedCategory("all")}
       >
         All projects
       </div>
       <div 
-        className={`px-2 py-1 text-sm border border-primary text-primary w-fit hover:bg-secondary cursor-pointer ${selectedCategory === "web" ? "bg-secondary" : ""}`}
+        className={`px-2 py-1 text-xs sm:text-sm border border-primary text-primary w-fit hover:bg-secondary cursor-pointer ${selectedCategory === "web" ? "bg-secondary" : ""}`}
         onClick={() => setSelectedCategory("web")}
       >
         Web projects
       </div>
       <div 
-        className={`px-2 py-1 text-sm border border-primary text-primary w-fit hover:bg-secondary cursor-pointer ${selectedCategory === "AI" ? "bg-secondary" : ""}`}
+        className={`px-2 py-1 text-xs sm:text-sm border border-primary text-primary w-fit hover:bg-secondary cursor-pointer ${selectedCategory === "AI" ? "bg-secondary" : ""}`}
         onClick={() => setSelectedCategory("AI")}
       >
         AI projects
       </div>
       <div 
-        className={`px-2 py-1 text-sm border border-primary text-primary w-fit hover:bg-secondary cursor-pointer ${selectedCategory === "fun" ? "bg-secondary" : ""}`}
+        className={`px-2 py-1 text-xs sm:text-sm border border-primary text-primary w-fit hover:bg-secondary cursor-pointer ${selectedCategory === "fun" ? "bg-secondary" : ""}`}
         onClick={() => setSelectedCategory("fun")}
       >
         Fun projects
       </div>
     </div>
-    <ul className="flex flex-col gap-5 w-full">
+    <ul className="flex flex-col gap-3 sm:gap-4 lg:gap-5 w-full">
       {filteredProjects.map((project, index) => (
         <li
           key={index}
-          className="flex items-center text-left gap-2 w-full justify-between  max-[590px]:flex-col max-[590px]:items-start"
+          className="flex flex-col sm:flex-row sm:items-start text-left gap-2 sm:gap-4 w-full sm:justify-between min-w-0"
         >
           <Link
-            className="flex items-center gap-1 font-medium justify-between text-[var(--blue-color)]  max-[590px]:w-full"
+            className="flex items-center gap-1 font-medium text-[var(--blue-color)] w-fit sm:w-auto"
             target="_blank"
             href={project.link}
           >
             {project.title}
-            <FiArrowUpRight size={18} />
+            <FiArrowUpRight size={16} className="sm:w-[18px] sm:h-[18px]" />
           </Link>
-          <p className="opacity-80">{project.description}</p>
+          <p className="opacity-80 text-sm sm:text-base break-words overflow-wrap-anywhere max-w-full">{project.description}</p>
         </li>
       ))}
     </ul>

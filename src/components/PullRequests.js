@@ -88,10 +88,10 @@ const PullRequests = () => {
 
   if (loading) {
     return (
-      <div id="pull-requests" className="flex flex-col items-center w-full justify-between text-left gap-6 px-10">
-        <h1 className="tracking-tight underline items-start w-full text-xl font-semibold">Pull Requests</h1>
+      <div id="pull-requests" className="flex flex-col items-center w-full justify-between text-left gap-6 px-4 sm:px-6 lg:px-10">
+        <h1 className="tracking-tight underline items-start w-full text-lg sm:text-xl font-semibold">Pull Requests</h1>
         <div className="flex items-center justify-center w-full py-8">
-          <p className="opacity-80">Loading contributions...</p>
+          <p className="opacity-80 text-sm sm:text-base">Loading contributions...</p>
         </div>
       </div>
     );
@@ -99,23 +99,23 @@ const PullRequests = () => {
 
   if (error) {
     return (
-      <div id="pull-requests" className="flex flex-col items-center w-full justify-between text-left gap-6 px-10">
-        <h1 className="tracking-tight underline items-start w-full text-xl font-semibold">Pull Requests</h1>
+      <div id="pull-requests" className="flex flex-col items-center w-full justify-between text-left gap-6 px-4 sm:px-6 lg:px-10">
+        <h1 className="tracking-tight underline items-start w-full text-lg sm:text-xl font-semibold">Pull Requests</h1>
         <div className="flex items-center justify-center w-full py-8">
-          <p className="text-red-600">Error: {error}</p>
+          <p className="text-red-600 text-sm sm:text-base">Error: {error}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div id="contributions" className="flex flex-col items-center w-full justify-between text-left gap-6 px-10">
-      <h1 className="tracking-tight underline items-start w-full text-xl font-semibold">Some contributions</h1>
+    <div id="contributions" className="flex flex-col items-center w-full justify-between text-left gap-4 sm:gap-6 px-4 sm:px-6 lg:px-10">
+      <h1 className="tracking-tight underline items-start w-full text-lg sm:text-xl font-semibold">Some contributions</h1>
 
-      <div className="flex flex-wrap items-start w-full gap-6">
+      <div className="flex flex-wrap items-start w-full gap-2 sm:gap-4 lg:gap-6">
         <button
           onClick={() => setFilter('all')}
-          className={`px-2 py-1 text-sm border border-primary w-fit hover:bg-secondary ${filter === 'all' ? 'bg-secondary text-primary' : 'text-primary'
+          className={`px-3 py-2 text-xs sm:text-sm border border-primary w-fit hover:bg-secondary transition-colors ${filter === 'all' ? 'bg-secondary text-primary' : 'text-primary'
             }`}
         >
           All ({pullRequests.filter(pr =>
@@ -127,7 +127,7 @@ const PullRequests = () => {
         </button>
         <button
           onClick={() => setFilter('open')}
-          className={`px-2 py-1 text-sm border border-primary w-fit hover:bg-secondary ${filter === 'open' ? 'bg-secondary text-primary' : 'text-primary'
+          className={`px-3 py-2 text-xs sm:text-sm border border-primary w-fit hover:bg-secondary transition-colors ${filter === 'open' ? 'bg-secondary text-primary' : 'text-primary'
             }`}
         >
           Open ({pullRequests.filter(pr =>
@@ -140,7 +140,7 @@ const PullRequests = () => {
         </button>
         <button
           onClick={() => setFilter('closed')}
-          className={`px-2 py-1 text-sm border border-primary w-fit hover:bg-secondary ${filter === 'closed' ? 'bg-secondary text-primary' : 'text-primary'
+          className={`px-3 py-2 text-xs sm:text-sm border border-primary w-fit hover:bg-secondary transition-colors ${filter === 'closed' ? 'bg-secondary text-primary' : 'text-primary'
             }`}
         >
           Closed ({pullRequests.filter(pr =>
@@ -153,25 +153,33 @@ const PullRequests = () => {
         </button>
       </div>
 
-      <ul className="flex flex-col gap-5 w-full">
+      <ul className="flex flex-col gap-3 sm:gap-4 lg:gap-5 w-full">
         {displayedPRs.map((pr) => (
           <li
             key={pr.id}
-            className="flex flex-col gap-2 w-full p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+            className="flex flex-col gap-2 sm:gap-3 w-full p-3 sm:p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
           >
-            <div className="flex items-center text-left gap-2 w-full justify-between max-[590px]:flex-col max-[590px]:items-start">
-              <div className="flex items-center gap-2">
-                {getStateIcon(pr.state, pr.merged_at)}
+            <div className="flex flex-col sm:flex-row sm:items-center text-left gap-2 w-full sm:justify-between">
+              <div className="flex items-start sm:items-center gap-2 flex-1 min-w-0">
+                <div className="flex-shrink-0 mt-0.5 sm:mt-0">
+                  {getStateIcon(pr.state, pr.merged_at)}
+                </div>
                 <Link
-                  className="flex items-center gap-1 font-medium text-[var(--blue-color)] hover:underline"
+                  className="flex items-start sm:items-center gap-1 font-medium text-[var(--blue-color)] hover:underline text-sm sm:text-base break-words min-w-0 flex-1"
                   target="_blank"
                   href={pr.html_url}
                 >
-                  {pr.title.length > 40 ? `${pr.title.substring(0, 40)}...` : pr.title}
-                  <FiArrowUpRight size={16} />
+                  <span className="break-words">
+                    {window.innerWidth < 640 && pr.title.length > 40 
+                      ? `${pr.title.substring(0, 40)}...` 
+                      : pr.title.length > 50 
+                        ? `${pr.title.substring(0, 50)}...` 
+                        : pr.title}
+                  </span>
+                  <FiArrowUpRight size={14} className="flex-shrink-0 mt-0.5 sm:mt-0" />
                 </Link>
               </div>
-              <div className="flex items-center gap-2 text-sm opacity-80">
+              <div className="flex items-center gap-2 text-xs sm:text-sm opacity-80 flex-shrink-0">
                 <span className={getStateColor(pr.state, pr.merged_at)}>
                   {pr.merged_at ? 'Merged' : pr.state}
                 </span>
@@ -180,18 +188,18 @@ const PullRequests = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-sm opacity-80">
+            <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm opacity-80">
               <span>#{pr.number}</span>
               <span>•</span>
               <Link
                 href={pr.repository.html_url}
                 target="_blank"
-                className="text-[var(--blue-color)] hover:underline"
+                className="text-[var(--blue-color)] hover:underline break-all"
               >
                 {pr.repository.full_name}
               </Link>
-              <span>•</span>
-              <span>by Dishant1804</span>
+              <span className='hidden md:inline'>•</span>
+              <span className='hidden md:inline'>by Dishant1804</span>
             </div>
           </li>
         ))}
@@ -200,7 +208,7 @@ const PullRequests = () => {
       {filteredPRs.length > 5 && (
         <button
           onClick={() => setShowAll(!showAll)}
-          className="px-4 py-2 text-sm border border-primary hover:bg-secondary text-primary rounded transition-colors"
+          className="px-4 py-2 text-xs sm:text-sm border border-primary hover:bg-secondary text-primary rounded transition-colors"
         >
           {showAll ? 'Show Less' : `Show More (${filteredPRs.length - 5} more)`}
         </button>
@@ -208,7 +216,7 @@ const PullRequests = () => {
 
       {filteredPRs.length === 0 && (
         <div className="flex items-center justify-center w-full py-8">
-          <p className="opacity-80">No pull requests found for the selected filter.</p>
+          <p className="opacity-80 text-sm sm:text-base text-center">No pull requests found for the selected filter.</p>
         </div>
       )}
     </div>

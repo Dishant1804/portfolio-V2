@@ -13,12 +13,9 @@
   --font-mono: Jetbrains Mono, monospace;
   --font-inter: Inter var, system-ui, sans-serif;
 
-  --blue: var(--blue-color)
-  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
-  --background-image-gradient-conic: conic-gradient(
-    from 180deg at 50% 50%,
-    var(--tw-gradient-stops)
-  );
+  --blue: var(--blue-color) --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%,
+      var(--tw-gradient-stops));
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -74,14 +71,17 @@
     from {
       height: 0;
     }
+
     to {
       height: var(--radix-accordion-content-height);
     }
   }
+
   @keyframes accordion-up {
     from {
       height: var(--radix-accordion-content-height);
     }
+
     to {
       height: 0;
     }
@@ -94,7 +94,7 @@
   --black-color: #000;
   --white-color: #fff;
   --blue-color: #1d4ed8;
-  
+
   --font-fallback: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto",
     "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -155,10 +155,12 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
 body {
   @apply bg-background text-foreground;
 }
@@ -174,15 +176,15 @@ html {
 }
 
 .prose h1 {
-  @apply py-3 text-4xl font-bold tracking-tight text-foreground;
+  @apply py-3 text-2xl sm:text-4xl font-bold tracking-tight text-foreground;
 }
 
 .prose h2 {
-  @apply py-3 text-3xl font-semibold tracking-tight text-foreground;
+  @apply py-3 text-xl sm:text-3xl font-semibold tracking-tight text-foreground;
 }
 
 .prose h3 {
-  @apply py-3 text-2xl font-semibold tracking-tight text-foreground;
+  @apply py-3 text-lg sm:text-2xl font-semibold tracking-tight text-foreground;
 }
 
 .prose h4 {
@@ -218,11 +220,11 @@ html {
 }
 
 .prose pre {
-  @apply my-4 overflow-x-auto  p-4 text-sm;
+  @apply my-4 overflow-x-auto p-4 text-sm;
 }
 
 .prose code {
-  @apply  bg-muted  py-0.5 font-mono text-sm;
+  @apply bg-muted py-0.5 font-mono text-sm;
 }
 
 .prose a {
@@ -230,7 +232,7 @@ html {
 }
 
 .prose img {
-  @apply  border border-border;
+  @apply border border-border;
 }
 
 .prose hr {
@@ -325,7 +327,7 @@ html {
 
 /* Table of Contents styles */
 .prose .table-of-contents {
-  @apply my-8  border border-border bg-card p-6;
+  @apply my-8 border border-border bg-card p-6;
 }
 
 .prose .table-of-contents ul {
@@ -398,9 +400,9 @@ html {
     outline-offset: 2px;
   }
 
-  code,pre {
+  code,
+  pre {
     font-family: var(--font-mono) !important;
   }
 
 }
-
