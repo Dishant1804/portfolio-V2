@@ -27,6 +27,8 @@ const blacklistPRs = [
     { repo: 'OWASP/Nest', number: 712 },
     { repo: 'OWASP/Nest', number: 715 },
     { repo: 'OWASP/Nest', number: 1011 },
+    { repo: 'OWASP/Nest', number: 1715 },
+    { repo: 'OWASP/Nest', number: 1707 },
   ];
 
 export default blacklistPRs;
