@@ -47,7 +47,7 @@ const Header = () => {
           <div className="flex gap-2 md:gap-4 flex-wrap py-4 md:py-6">
             <Link
               className="underline text-[var(--blue-color)] underline-offset-4 text-sm md:text-base"
-              href="https://x.com/MiyaniDishant"
+              href="https://x.com/dishantwt_"
               target="_blank"
             >
               twitter/x
@@ -71,7 +71,7 @@ const Header = () => {
             <span className="hidden sm:inline">//</span>
             <Link
               className="underline text-[var(--blue-color)] underline-offset-4 text-sm md:text-base"
-              href="mailto:dishantmiyai1804@gmail.com"
+              href="mailto:dishantmiyani1804@gmail.com"
               target="_blank"
             >
               mail
