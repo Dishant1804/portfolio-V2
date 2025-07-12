@@ -9,7 +9,7 @@ const projects = [
     title: "Finvest Analysis",
     category : ["web" ,"AI"],
     description: "Get investment insights with AI agent",
-    link: "https://github.com/Dishant1804/Financial-Agent",
+    link: "https://finvest-rosy.vercel.app",
   },
   {
     title: "Skill Master",
