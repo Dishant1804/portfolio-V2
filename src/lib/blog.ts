@@ -5,9 +5,11 @@ import MarkdownIt from "markdown-it";
 import container from "markdown-it-container";
 import markdownItAnchor from "markdown-it-anchor";
 import Prism from "prismjs";
+import type { Post, Heading, MarkdownResult } from "@/types/blog";
+
 const postsDirectory = path.join(process.cwd(), "content/writings");
 
-export function getAllPosts() {
+export function getAllPosts(): Post[] {
   try {
     // If directory is empty or doesn't exist, return empty array
     if (!fs.existsSync(postsDirectory)) {
@@ -32,7 +34,7 @@ export function getAllPosts() {
           slug,
           content,
           ...data,
-        };
+        } as Post;
       });
 
     return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -42,7 +44,7 @@ export function getAllPosts() {
   }
 }
 
-export function getPostBySlug(slug) {
+export function getPostBySlug(slug: string): Post {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
@@ -51,22 +53,24 @@ export function getPostBySlug(slug) {
     slug,
     content,
     ...data,
-  };
+  } as Post;
 }
 
-export async function markdownToHtml(markdown) {
-  const headings = [];
+export async function markdownToHtml(
+  markdown: string
+): Promise<MarkdownResult> {
+  const headings: Heading[] = [];
   const md = new MarkdownIt({
     html: true,
     linkify: true,
     typographer: true,
-    highlight: function (str, lang) {
+    highlight: function (str: string, lang: string) {
       if (lang && Prism.languages[lang]) {
         try {
           return `<pre class="language-${lang}" tabindex="0"><code class="language-${lang}">${Prism.highlight(
             str,
             Prism.languages[lang],
-            lang,
+            lang
           )}</code></pre>`;
         } catch {
           return "";
@@ -79,7 +83,7 @@ export async function markdownToHtml(markdown) {
       permalink: true,
       permalinkClass: "anchor",
       permalinkSymbol: "#",
-      callback: (token, info) => {
+      callback: (token: any, info: any) => {
         headings.push({
           level: parseInt(token.tag.slice(1)),
           text: info.title,

@@ -4,21 +4,44 @@ import Link from "next/link";
 import Image from "next/image";
 import { Divider } from "./ui/divider";
 
-const Header = () => {
+interface ScrollToProjectParams {
+  id: string;
+}
 
-  const scrollToProject = ({ id }) => {
+const Header = () => {
+  const scrollToProject = ({ id }: ScrollToProjectParams) => {
     const projectElement = document.getElementById(id);
     if (projectElement) {
-      projectElement.scrollIntoView({ behavior: 'smooth' });
+      projectElement.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
+
   return (
     <>
       <header className="flex flex-col gap-8 md:gap-16 text-justify justify-evenly">
         <nav className="flex flex-col md:flex-row gap-4 px-4 md:px-10">
-          <h3 className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base" onClick={() => scrollToProject({ id: 'blog' })}>Blogs</h3><span className="hidden md:flex">//</span>
-          <h3 className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base" onClick={() => scrollToProject({ id: 'project' })} >Projects</h3> <span className="hidden md:flex">//</span>
-          <h3 className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base" onClick={() => { scrollToProject({ id: 'contributions' }) }}>Contributions</h3>
+          <h3
+            className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base"
+            onClick={() => scrollToProject({ id: "blog" })}
+          >
+            Blogs
+          </h3>
+          <span className="hidden md:flex">//</span>
+          <h3
+            className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base"
+            onClick={() => scrollToProject({ id: "project" })}
+          >
+            Projects
+          </h3>{" "}
+          <span className="hidden md:flex">//</span>
+          <h3
+            className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base"
+            onClick={() => {
+              scrollToProject({ id: "contributions" });
+            }}
+          >
+            Contributions
+          </h3>
         </nav>
 
         <Divider />
@@ -26,9 +49,13 @@ const Header = () => {
         <div className="flex flex-col gap-4 md:gap-6 px-4 md:px-10">
           <div className="flex flex-col sm:flex-row w-full justify-between items-start sm:items-center gap-4">
             <div className="flex flex-col gap-4 md:gap-6">
-              <h1 className="tracking-tight underline text-lg md:text-xl font-semibold">About</h1>
+              <h1 className="tracking-tight underline text-lg md:text-xl font-semibold">
+                About
+              </h1>
               <div className="flex flex-col">
-                <h1 className="tracking-tight text-base md:text-lg">Dishant Miyani</h1>
+                <h1 className="tracking-tight text-base md:text-lg">
+                  Dishant Miyani
+                </h1>
               </div>
             </div>
             <Image

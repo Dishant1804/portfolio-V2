@@ -58,7 +58,14 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.4",
+    "@types/markdown-it": "^14.1.2",
+    "@types/markdown-it-container": "^2.0.10",
+    "@types/node": "^24.1.0",
+    "@types/prismjs": "^1.26.5",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "postcss": "^8",
-    "tailwindcss": "^4.1.4"
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.3"
   }
 }

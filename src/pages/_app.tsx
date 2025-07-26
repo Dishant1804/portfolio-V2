@@ -1,24 +1,20 @@
 import "../styles/globals.css";
 
-import { Partytown } from "@builder.io/partytown/react";
 import Head from "next/head";
 import Link from "next/link";
-
-// Change font import here
 import { JetBrains_Mono } from "next/font/google";
+import type { AppProps } from "next/app";
 
 const jetBrains_Mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
 });
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <Partytown debug={true} forward={["dataLayer.push"]} />
         <title>Dishant Miyani</title>
-        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
         <meta name="robots" content="all" />
         <meta name="description" content="My personal portfolio website." />
         <meta name="theme-color" content="#fffffff" />

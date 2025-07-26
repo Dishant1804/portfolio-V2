@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { GetStaticProps, GetStaticPaths } from "next";
 import { Divider } from "@/components/ui/divider";
 
 import { getAllPosts, getPostBySlug, markdownToHtml } from "@/lib/blog";
+import type { Post, NavigationPost } from "@/types/blog";
 
 import { ChevronLeft, ChevronRight, ArrowUpLeft } from "lucide-react";
 
@@ -17,7 +19,13 @@ import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-bash";
 
-export default function BlogPost({ post, prevPost, nextPost }) {
+interface BlogPostProps {
+  post: Post;
+  prevPost: NavigationPost | null;
+  nextPost: NavigationPost | null;
+}
+
+export default function BlogPost({ post, prevPost, nextPost }: BlogPostProps) {
   const [showButton, setShowButton] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -40,7 +48,7 @@ export default function BlogPost({ post, prevPost, nextPost }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const calculateReadingTime = (text) => {
+  const calculateReadingTime = (text: string): number => {
     const wordsPerMinute = 200; // Average reading speed
     const wordCount = text.split(/\s+/).length;
     return Math.ceil(wordCount / wordsPerMinute);
@@ -87,7 +95,6 @@ export default function BlogPost({ post, prevPost, nextPost }) {
           </Link>
         </div>
         <div className="dark:prose-invert max-w-none flex flex-col gap-2">
-
           <Divider />
 
           <div className="flex flex-col gap-4 py-14">
@@ -110,7 +117,7 @@ export default function BlogPost({ post, prevPost, nextPost }) {
 
           <Divider />
 
-          <TableOfContents headings={post.headings} />
+          <TableOfContents headings={post.headings || []} />
           <div
             className="prose text-justify max-sm:text-pretty px-10 py-10 max-w-none"
             dangerouslySetInnerHTML={{ __html: post.content }}
@@ -157,10 +164,11 @@ export default function BlogPost({ post, prevPost, nextPost }) {
       {/* scroll to top button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-4 right-4 w-10 h-10 transition-all duration-300 ease-in-out bg-zinc-900 rounded-full text-white text-center justify-center flex-col items-center flex ${showButton
+        className={`fixed bottom-4 right-4 w-10 h-10 transition-all duration-300 ease-in-out bg-zinc-900 rounded-full text-white text-center justify-center flex-col items-center flex ${
+          showButton
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10 pointer-events-none"
-          }`}
+        }`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +186,7 @@ export default function BlogPost({ post, prevPost, nextPost }) {
   );
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getAllPosts();
   return {
     paths: posts.map((post) => ({
@@ -188,15 +196,17 @@ export async function getStaticPaths() {
     })),
     fallback: false,
   };
-}
+};
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps<BlogPostProps> = async ({
+  params,
+}) => {
   const posts = getAllPosts();
-  const currentPost = getPostBySlug(params.slug);
+  const currentPost = getPostBySlug(params!.slug as string);
   const { html, headings } = await markdownToHtml(currentPost.content);
 
   // Find current post index
-  const currentIndex = posts.findIndex((post) => post.slug === params.slug);
+  const currentIndex = posts.findIndex((post) => post.slug === params!.slug);
 
   // Get previous and next posts
   const prevPost =
@@ -212,16 +222,16 @@ export async function getStaticProps({ params }) {
       },
       prevPost: prevPost
         ? {
-          title: prevPost.title,
-          slug: prevPost.slug,
-        }
+            title: prevPost.title,
+            slug: prevPost.slug,
+          }
         : null,
       nextPost: nextPost
         ? {
-          title: nextPost.title,
-          slug: nextPost.slug,
-        }
+            title: nextPost.title,
+            slug: nextPost.slug,
+          }
         : null,
     },
   };
-}
+};

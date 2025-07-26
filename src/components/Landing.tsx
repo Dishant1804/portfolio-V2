@@ -6,8 +6,13 @@ import Projects from "./Projects";
 import PullRequests from "./PullRequests";
 import Blogs from "./Blogs";
 import TechStack from "./TechStack";
+import type { Post } from "@/types/blog";
 
-export default function Landing({ posts }) {
+interface LandingProps {
+  posts: Post[];
+}
+
+export default function Landing({ posts }: LandingProps) {
   return (
     <>
       <article className="flex justify-between flex-col flex-wrap text-left font-medium relative">

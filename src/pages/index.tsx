@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { GetStaticProps } from "next";
 
 import { getAllPosts } from "@/lib/blog";
 
@@ -6,8 +7,13 @@ import Header from "@/components/Header";
 
 import { motion } from "motion/react";
 import Landing from "@/components/Landing";
+import type { Post } from "@/types/blog";
 
-export default function Home({ posts }) {
+interface HomeProps {
+  posts: Post[];
+}
+
+export default function Home({ posts }: HomeProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -77,11 +83,11 @@ export default function Home({ posts }) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const posts = getAllPosts();
   return {
     props: {
       posts,
     },
   };
-}
+};

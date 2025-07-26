@@ -1,15 +1,22 @@
 import Link from "next/link";
+import type { Heading } from "@/types/blog";
 
-export function TableOfContents({ headings = [] }) {
+interface TableOfContentsProps {
+  headings?: Heading[];
+}
+
+export function TableOfContents({ headings = [] }: TableOfContentsProps) {
   if (headings.length === 0) {
     return null;
   }
 
   return (
-    <div type="single" collapsible className="w-full p-0">
-      <div value="toc" className="border-b px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
+    <div className="w-full p-0">
+      <div className="border-b px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
         <div className="p-0">
-          <h2 className="font-medium text-sm sm:text-base">Table of Contents</h2>
+          <h2 className="font-medium text-sm sm:text-base">
+            Table of Contents
+          </h2>
         </div>
         <div>
           <nav className="flex flex-col space-y-1 sm:space-y-2 mt-3 sm:mt-4">

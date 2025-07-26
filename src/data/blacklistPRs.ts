@@ -1,0 +1,36 @@
+import type { BlacklistPR } from "@/types/data";
+
+const blacklistPRs: BlacklistPR[] = [
+  { repo: "SammanSarkar/GSoC_archive_2025", number: 40 },
+  { repo: "OWASP/Nest", number: 1380 },
+  { repo: "Rajgupta36/Nest-n", number: 7 },
+  { repo: "Rajgupta36/Nest-n", number: 4 },
+  { repo: "OWASP/Nest", number: 1227 },
+  { repo: "DotPro-Labs/blink", number: 14 },
+  { repo: "DotPro-Labs/blink", number: 13 },
+  { repo: "DotPro-Labs/blink", number: 9 },
+  { repo: "DotPro-Labs/blink", number: 6 },
+  { repo: "DotPro-Labs/blink", number: 5 },
+  { repo: "DotPro-Labs/blink", number: 3 },
+  { repo: "DotPro-Labs/site", number: 3 },
+  { repo: "DotPro-Labs/notdump", number: 1 },
+  { repo: "DotPro-Labs/site", number: 1 },
+  { repo: "DevPatils/qrcode-reactNative", number: 4 },
+  { repo: "OWASP/Nest", number: 481 },
+  { repo: "OWASP/Nest", number: 904 },
+  { repo: "OWASP/Nest", number: 1113 },
+  { repo: "OWASP/Nest", number: 1101 },
+  { repo: "OWASP/Nest", number: 714 },
+  { repo: "OWASP/Nest", number: 576 },
+  { repo: "OWASP/Nest", number: 513 },
+  { repo: "OWASP/Nest", number: 515 },
+  { repo: "OWASP/Nest", number: 683 },
+  { repo: "OWASP/Nest", number: 631 },
+  { repo: "OWASP/Nest", number: 712 },
+  { repo: "OWASP/Nest", number: 715 },
+  { repo: "OWASP/Nest", number: 1011 },
+  { repo: "OWASP/Nest", number: 1715 },
+  { repo: "OWASP/Nest", number: 1707 },
+];
+
+export default blacklistPRs;
