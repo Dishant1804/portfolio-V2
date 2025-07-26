@@ -9,25 +9,31 @@ const projects = [
     title: "Finvest Analysis",
     category : ["web" ,"AI"],
     description: "Get investment insights with AI agent",
-    link: "https://finvest-rosy.vercel.app",
+    link: "https://finvest.dishant.site/",
   },
   {
-    title: "Skill Master",
+    title: "Skill Master content",
     category : ["web" ,"frontend"],
     description: "Learn to grow your social media",
-    link: "https://skill-master-theta.vercel.app",
+    link: "https://skill-master-content.dishant.site/",
+  },
+  {
+    title: "Skill Master AI",
+    category : ["web" ,"frontend"],
+    description: "Learn to grow your social media",
+    link: "https://skill-master-content.dishant.site/",
   },
   {
     title: "Deblomassi",
     category : ["web" ,"frontend"],
     description: "Fast commerce for digital businesses",
-    link: "https://deblomassi.vercel.app/",
+    link: "https://deblomassi.dishant.site/",
   },
   {
     title: "Get paid to cheat",
     category : ["web" ,"frontend"],
     description: "Get rewards by showcasing cheats",
-    link: "https://get-paid-to-cheat-rust.vercel.app/",
+    link: "https://getpaidtocheat.dishant.site/",
   },
   {
     title: "Talk to doc(RAG)",
@@ -45,7 +51,7 @@ const projects = [
     title: "Refer it",
     category : ["web" ,"frontend"],
     description: "Get rewarded for reselling the program",
-    link: "https://refer-it-tau.vercel.app/",
+    link: "https://referit.dishant.site",
   },
   {
     title: "Web crawler",
@@ -63,7 +69,7 @@ const projects = [
     title: "Type Trek",
     category : ["fun", "web"],
     description: "Check your typing speed.",
-    link: "https://typetrek.netlify.app/",
+    link: "https://type-trek.dishant.site/",
   },
 ];
 
