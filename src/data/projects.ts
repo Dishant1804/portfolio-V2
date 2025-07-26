@@ -20,12 +20,6 @@ const projects: Project[] = [
     link: "https://skill-master-content.dishant.site/",
   },
   {
-    title: "Skill Master AI",
-    category: ["web", "frontend"],
-    description: "Learn to grow your social media",
-    link: "https://skill-master-content.dishant.site/",
-  },
-  {
     title: "Deblomassi",
     category: ["web", "frontend"],
     description: "Fast commerce for digital businesses",
