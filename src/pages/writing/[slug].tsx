@@ -12,12 +12,6 @@ import { ChevronLeft, ChevronRight, ArrowUpLeft } from "lucide-react";
 import { TableOfContents } from "@/components/writings/toc";
 
 import "prismjs/themes/prism-tomorrow.css";
-import Prism from "prismjs";
-// Load languages you want to support
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-jsx";
-import "prismjs/components/prism-typescript";
-import "prismjs/components/prism-bash";
 
 interface BlogPostProps {
   post: Post;
@@ -44,12 +38,30 @@ export default function BlogPost({ post, prevPost, nextPost }: BlogPostProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const initPrism = async () => {
+      try {
+        const Prism = (await import("prismjs")).default;
+        await import("prismjs/components/prism-javascript" as any);
+        await import("prismjs/components/prism-jsx" as any);
+        await import("prismjs/components/prism-typescript" as any);
+        await import("prismjs/components/prism-bash" as any);
+        
+        Prism.highlightAll();
+      } catch (error) {
+        console.error("Failed to load Prism.js:", error);
+      }
+    };
+
+    initPrism();
+  }, [post.content]);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const calculateReadingTime = (text: string): number => {
-    const wordsPerMinute = 200; // Average reading speed
+    const wordsPerMinute = 200;
     const wordCount = text.split(/\s+/).length;
     return Math.ceil(wordCount / wordsPerMinute);
   };
