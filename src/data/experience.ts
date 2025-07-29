@@ -6,7 +6,7 @@ const experience: Experience[] = [
     title: "Contributor under Google Summer of Code",
     company: "OWASP Foundation",
     link: "https://owasp.org/",
-    timeline: "June 2025 - August 2025",
+    timeline: "June 2025 - Present",
     imgsrc: "/owasp.png",
   },
   {
