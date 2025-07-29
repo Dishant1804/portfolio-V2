@@ -41,7 +41,13 @@ const projects: Project[] = [
     title: "Customer support Agent",
     category: ["AI"],
     description: "AI agent to handle customer queries.",
-    link: "https://github.com/Dishant1804/Langgraph-learnings/blob/master/agents/customer_support_agent.ipynb",
+    link: "https://github.com/Dishant1804/customer-support-agent",
+  },
+  {
+    title: "News aggregator Agent",
+    category: ["AI"],
+    description: "AI agent that aggregates news from sources.",
+    link: "https://github.com/Dishant1804/news-agent",
   },
   {
     title: "Refer it",
