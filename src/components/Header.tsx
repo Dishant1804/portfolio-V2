@@ -68,7 +68,7 @@ const Header = () => {
           </div>
           <p className="text-left text-sm md:text-base">
             &gt; Engineer, with a passion to convert ideas into code <br></br>
-            &gt; i trade comfort zones for bug <br></br>
+            &gt; I trade comfort zone for bugs <br></br>
             &gt; currently building AI agents <br></br>
           </p>
           <div className="flex gap-2 md:gap-4 flex-wrap py-4 md:py-6">

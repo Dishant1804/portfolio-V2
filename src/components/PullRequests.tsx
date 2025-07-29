@@ -6,8 +6,8 @@ import {
   FiGitMerge,
   FiX,
 } from "react-icons/fi";
-import blacklist from "@/data/blacklistrepo";
-import blacklistPRs from "@/data/blacklistPRs";
+import blacklist from "@/data/nonDisplayRepos";
+import blacklistPRs from "@/data/nonDisplayPRs";
 import type { PullRequest, PullRequestsResponse } from "@/types/api";
 
 type FilterType = "all" | "open" | "closed";
