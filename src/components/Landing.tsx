@@ -22,8 +22,8 @@ export default function Landing({ posts }: LandingProps) {
           <Divider />
           <Projects />
           <Divider />
-          <PullRequests />
-          <Divider />
+          {/* <PullRequests /> */}
+          {/* <Divider /> */}
           <TechStack />
           <Divider />
           <Blogs posts={posts} />

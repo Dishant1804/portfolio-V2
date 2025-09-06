@@ -33,7 +33,7 @@ const Header = () => {
           >
             Projects
           </h3>{" "}
-          <span className="hidden md:flex">//</span>
+          {/* <span className="hidden md:flex">//</span>
           <h3
             className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base"
             onClick={() => {
@@ -41,7 +41,7 @@ const Header = () => {
             }}
           >
             Contributions
-          </h3>
+          </h3> */}
         </nav>
 
         <Divider />
