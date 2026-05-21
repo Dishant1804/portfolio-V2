@@ -9,23 +9,23 @@ const Experience = () => {
       id="project"
       className="flex flex-col items-center w-full justify-between text-left gap-6 px-4 sm:px-6 md:px-10"
     >
-      <h1 className="tracking-tight underline items-start w-full text-lg sm:text-xl font-semibold">
+      <h1 className="tracking-tight underline items-start w-full text-lg sm:text-xl font-semibold ">
         Experience
       </h1>
-      <ul className="flex flex-col gap-4 sm:gap-6 w-full">
+      <ul className="flex flex-col gap-4 sm:gap-4 w-full">
         {experience.map((exp, index) => (
           <li
             key={index}
             className="flex items-start sm:items-center text-left gap-2 w-full justify-between flex-col sm:flex-row"
           >
             <div className="flex flex-row items-center leading-relaxed gap-3 w-full sm:w-auto">
-              <Image
+              {/* <Image
                 src={exp.imgsrc}
                 alt=""
                 height={40}
                 width={40}
                 className="rounded-full hidden sm:flex"
-              />
+              /> */}
               <div className="flex flex-col items-start leading-relaxed flex-1">
                 <Link
                   className="flex items-center gap-1 font-medium text-[var(--blue-color)] w-full"

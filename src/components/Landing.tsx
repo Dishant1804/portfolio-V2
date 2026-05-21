@@ -16,16 +16,16 @@ export default function Landing({ posts }: LandingProps) {
   return (
     <>
       <article className="flex justify-between flex-col flex-wrap text-left font-medium relative">
-        <div className="flex justify-between flex-col gap-16 text-left relative z-10">
+        <div className="flex justify-between flex-col gap-8 text-left relative z-10">
           <Divider />
           <Experience />
           <Divider />
-          <Projects />
-          <Divider />
+          {/* <Projects /> */}
+          {/* <Divider /> */}
           {/* <PullRequests /> */}
           {/* <Divider /> */}
-          <TechStack />
-          <Divider />
+          {/* <TechStack /> */}
+          {/* <Divider /> */}
           <Blogs posts={posts} />
         </div>
       </article>

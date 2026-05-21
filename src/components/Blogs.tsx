@@ -13,7 +13,7 @@ const Blogs = ({ posts }: BlogsProps) => {
       className="flex flex-col items-center w-full justify-between text-left gap-6 px-4 sm:px-6 md:px-10"
     >
       <h1 className="tracking-tight underline items-start w-full text-lg sm:text-xl font-semibold">
-        Blogs
+        Writing
       </h1>
       <ul className="flex flex-col gap-4 sm:gap-5 w-full">
         {posts?.map((post) => (

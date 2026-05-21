@@ -70,7 +70,7 @@ export default function Home({ posts }: HomeProps) {
         variants={containerVariants}
         initial="hidden"
         animate="show"
-        className="flex flex-col py-10 basics-prose gap-16 border border-t-0 border-b-0"
+        className="flex flex-col py-10 basics-prose gap-8 border border-t-0 border-b-0"
       >
         <motion.div variants={itemVariants}>
           <Header />

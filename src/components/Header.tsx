@@ -18,8 +18,8 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex flex-col gap-8 md:gap-16 text-justify justify-evenly">
-        <nav className="flex flex-col md:flex-row gap-4 px-4 md:px-10">
+      <header className="flex flex-col gap-8 text-justify justify-evenly">
+        {/* <nav className="flex flex-col md:flex-row gap-4 px-4 md:px-10">
           <h3
             className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base"
             onClick={() => scrollToProject({ id: "blog" })}
@@ -33,7 +33,7 @@ const Header = () => {
           >
             Projects
           </h3>{" "}
-          {/* <span className="hidden md:flex">//</span>
+          <span className="hidden md:flex">//</span>
           <h3
             className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base"
             onClick={() => {
@@ -41,8 +41,8 @@ const Header = () => {
             }}
           >
             Contributions
-          </h3> */}
-        </nav>
+          </h3>
+        </nav> */}
 
         <Divider />
 
@@ -52,26 +52,16 @@ const Header = () => {
               <h1 className="tracking-tight underline text-lg md:text-xl font-semibold">
                 About
               </h1>
-              <div className="flex flex-col">
-                <h1 className="tracking-tight text-base md:text-lg">
-                  Dishant Miyani
-                </h1>
+              <div className="flex flex-row gap-4">
+                <div className="flex flex-col">
+                  <h1 className="tracking-tight text-base md:text-lg">
+                    Dishant Miyani
+                  </h1>
+                </div>
               </div>
             </div>
-            <Image
-              src="/profile.jpeg"
-              alt="Dishant Miyani profile picture"
-              width={80}
-              height={80}
-              className="rounded-full sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[100px] lg:h-[100px]"
-            />
           </div>
-          <p className="text-left text-sm md:text-base">
-            &gt; Engineer, with a passion to convert ideas into code <br></br>
-            &gt; I trade comfort zone for bugs <br></br>
-            &gt; currently building AI agents <br></br>
-          </p>
-          <div className="flex gap-2 md:gap-4 flex-wrap py-4 md:py-6">
+          <div className="flex gap-2 md:gap-4 flex-wrap py-4">
             <Link
               className="underline text-[var(--blue-color)] underline-offset-4 text-sm md:text-base"
               href="https://x.com/dishantwt_"
@@ -101,7 +91,7 @@ const Header = () => {
               href="mailto:dishantmiyani1804@gmail.com"
               target="_blank"
             >
-              mail
+              email
             </Link>
           </div>
           <div className="flex flex-wrap">

@@ -13,10 +13,15 @@ const jetBrains_Mono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
+const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY as string, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
+    if (!posthogKey || posthog.__loaded) return;
+
+    posthog.init(posthogKey, {
+      api_host: "/relay",
+      ui_host: "https://us.posthog.com",
       person_profiles: "identified_only",
       defaults: "2025-05-24",
       loaded: (posthog) => {
@@ -25,9 +30,8 @@ export default function App({ Component, pageProps }: AppProps) {
     });
   }, []);
 
-  return (
-    <PostHogProvider client={posthog}>
-      <>
+  const content = (
+    <>
         <Head>
           <title>Dishant Miyani</title>
           <meta name="robots" content="all" />
@@ -68,7 +72,10 @@ export default function App({ Component, pageProps }: AppProps) {
           {...pageProps}
           className={`${jetBrains_Mono.className} ${jetBrains_Mono.variable}`}
         />
-      </>
-    </PostHogProvider>
+    </>
   );
+
+  if (!posthogKey) return content;
+
+  return <PostHogProvider client={posthog}>{content}</PostHogProvider>;
 }
