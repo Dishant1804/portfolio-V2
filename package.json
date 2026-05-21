@@ -31,7 +31,7 @@
     "markdown-it-sup": "^2.0.0",
     "markdown-it-table-of-contents": "^0.9.0",
     "motion": "^12.0.6",
-    "next": "^15.1.6",
+    "next": "15.1.11",
     "node-fetch": "^3.3.2",
     "posthog-js": "^1.258.2",
     "prismjs": "^1.29.0",
