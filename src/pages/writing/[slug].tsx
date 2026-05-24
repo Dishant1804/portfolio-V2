@@ -4,7 +4,14 @@ import Head from "next/head";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { Divider } from "@/components/ui/divider";
 
-import { getAllPosts, getPostBySlug, markdownToHtml } from "@/lib/blog";
+import {
+  createPreviewHtml,
+  getAllPosts,
+  getPostBySlug,
+  getReadingTime,
+  markdownToHtml,
+} from "@/lib/blog";
+import { WritingPreviewSource } from "@/components/writings/WritingPreviewSource";
 import type { Post, NavigationPost } from "@/types/blog";
 
 import { ChevronLeft, ChevronRight, ArrowUpLeft } from "lucide-react";
@@ -15,11 +22,17 @@ import "prismjs/themes/prism-tomorrow.css";
 
 interface BlogPostProps {
   post: Post;
+  previewHtml: string;
   prevPost: NavigationPost | null;
   nextPost: NavigationPost | null;
 }
 
-export default function BlogPost({ post, prevPost, nextPost }: BlogPostProps) {
+export default function BlogPost({
+  post,
+  previewHtml,
+  prevPost,
+  nextPost,
+}: BlogPostProps) {
   const [showButton, setShowButton] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -60,13 +73,11 @@ export default function BlogPost({ post, prevPost, nextPost }: BlogPostProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const calculateReadingTime = (text: string): number => {
-    const wordsPerMinute = 200;
-    const wordCount = text.split(/\s+/).length;
-    return Math.ceil(wordCount / wordsPerMinute);
-  };
-
-  const readingTime = calculateReadingTime(post.content);
+  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
   return (
     <>
@@ -101,6 +112,7 @@ export default function BlogPost({ post, prevPost, nextPost }: BlogPostProps) {
         <div className="px-10 ">
           <Link
             href="/"
+            data-no-popover="true"
             className="text-muted-foreground flex items-center gap-1 text-sm underline w-fit"
           >
             <ArrowUpLeft size={12} /> Home
@@ -110,21 +122,13 @@ export default function BlogPost({ post, prevPost, nextPost }: BlogPostProps) {
           <Divider />
 
           <div className="flex flex-col gap-4 py-14">
-            <h1 className="px-10 text-2xl sm:text-4xl font-semibold text-[var(--blue-color)] ">
+            <h1 className="px-10 text-2xl sm:text-4xl font-semibold text-[var(--blue-color)]">
               {post.title}
             </h1>
 
-            <div className="px-10 flex gap-2 flex-wrap">
-              <small className="text-muted-foreground">
-                {new Date(post.date).toLocaleDateString("en-US")}
-              </small>
-              <small>•</small>
-              <small className="text-muted-foreground">{post.author}</small>
-              <small>•</small>
-              <small className="text-muted-foreground">
-                {readingTime} min read
-              </small>
-            </div>
+            <p className="px-10 text-sm text-muted-foreground">
+              {formattedDate} · {post.readingTime} min read
+            </p>
           </div>
 
           <Divider />
@@ -135,17 +139,31 @@ export default function BlogPost({ post, prevPost, nextPost }: BlogPostProps) {
             dangerouslySetInnerHTML={{ __html: post.content }}
             suppressHydrationWarning
           />
+
+          <div className="writing-popover-source">
+            <WritingPreviewSource
+              post={post}
+              formattedDate={formattedDate}
+              previewHtml={previewHtml}
+            />
+          </div>
         </div>
         {/* blog navigation */}
         <nav className="container mx-auto px-4 py-8 pb-20 border-t">
           <div className="flex justify-between items-center gap-4">
             {prevPost ? (
-              <Link href={`/writing/${prevPost.slug}`} className="flex-1 group">
+              <Link
+                href={`/writing/${prevPost.slug}`}
+                className="internal flex-1 group"
+              >
                 <div className="flex items-center gap-2 text-muted-foreground group-hover:text-primary">
                   <ChevronLeft className="h-4 w-4" />
                   <span className="text-sm">Previous</span>
                 </div>
-                <p className="text-lg font-medium mt-1 line-clamp-1">
+                <p
+                  data-popover-anchor
+                  className="text-lg font-medium mt-1 line-clamp-1"
+                >
                   {prevPost.title}
                 </p>
               </Link>
@@ -156,13 +174,16 @@ export default function BlogPost({ post, prevPost, nextPost }: BlogPostProps) {
             {nextPost ? (
               <Link
                 href={`/writing/${nextPost.slug}`}
-                className="flex-1 text-right group"
+                className="internal flex-1 text-right group"
               >
                 <div className="flex items-center justify-end gap-2 text-muted-foreground group-hover:text-primary">
                   <span className="text-sm">Next</span>
                   <ChevronRight className="h-4 w-4" />
                 </div>
-                <p className="text-lg font-medium mt-1 line-clamp-1">
+                <p
+                  data-popover-anchor
+                  className="text-lg font-medium mt-1 line-clamp-1"
+                >
                   {nextPost.title}
                 </p>
               </Link>
@@ -215,7 +236,9 @@ export const getStaticProps: GetStaticProps<BlogPostProps> = async ({
 }) => {
   const posts = getAllPosts();
   const currentPost = getPostBySlug(params!.slug as string);
+  const readingTime = getReadingTime(currentPost.content);
   const { html, headings } = await markdownToHtml(currentPost.content);
+  const previewHtml = createPreviewHtml(html, currentPost.excerpt);
 
   // Find current post index
   const currentIndex = posts.findIndex((post) => post.slug === params!.slug);
@@ -227,10 +250,12 @@ export const getStaticProps: GetStaticProps<BlogPostProps> = async ({
 
   return {
     props: {
+      previewHtml,
       post: {
         ...currentPost,
         content: html,
         headings: headings,
+        readingTime,
       },
       prevPost: prevPost
         ? {

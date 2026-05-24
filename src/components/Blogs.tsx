@@ -22,11 +22,11 @@ const Blogs = ({ posts }: BlogsProps) => {
             className="flex text-left gap-2 w-full justify-between sm:flex-row flex-col items-start"
           >
             <Link
-              className="flex items-center gap-1 font-medium justify-between text-[var(--blue-color)] w-full sm:w-auto"
+              className="internal group flex w-fit max-w-full items-center gap-1 font-medium text-[var(--blue-color)] underline decoration-transparent underline-offset-4 transition-[text-decoration-color,opacity] duration-200 ease-out hover:decoration-[var(--blue-color)] hover:opacity-90"
               href={`/writing/${post.slug}`}
             >
-              <span className="flex-1 sm:flex-none">{post.title}</span>
-              <span>
+              <span data-popover-anchor>{post.title}</span>
+              <span className="transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 <FiArrowUpRight size={18} />
               </span>
             </Link>

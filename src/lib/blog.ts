@@ -9,6 +9,43 @@ import type { Post, Heading, MarkdownResult } from "@/types/blog";
 
 const postsDirectory = path.join(process.cwd(), "content/writings");
 
+export function getReadingTime(content: string): number {
+  const wordCount = content.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+}
+
+export function createPreviewHtml(html: string, excerpt?: string): string {
+  if (excerpt?.trim()) {
+    return `<p>${escapeHtml(excerpt.trim())}</p>`;
+  }
+
+  const text = html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!text) return "";
+
+  const snippet = text.length > 320 ? `${text.slice(0, 320).trim()}…` : text;
+  return `<p>${escapeHtml(snippet)}</p>`;
+}
+
+function escapeHtml(text: string) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function isInternalWritingHref(href: string) {
+  return (
+    href.startsWith("/writing/") ||
+    href.startsWith("./writing/") ||
+    href.startsWith("../writing/")
+  );
+}
+
 export function getAllPosts(): Post[] {
   try {
     // If directory is empty or doesn't exist, return empty array
@@ -103,6 +140,24 @@ export async function markdownToHtml(
     .use(container, "info")
     .use(container, "note")
     .use(container, "tip");
+
+  const defaultLinkOpen =
+    md.renderer.rules.link_open ||
+    function (tokens, idx, options, env, self) {
+      return self.renderToken(tokens, idx, options);
+    };
+
+  md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+    const href = tokens[idx].attrGet("href");
+    if (href && isInternalWritingHref(href)) {
+      const existingClass = tokens[idx].attrGet("class");
+      tokens[idx].attrSet(
+        "class",
+        existingClass ? `${existingClass} internal` : "internal"
+      );
+    }
+    return defaultLinkOpen(tokens, idx, options, env, self);
+  };
 
   const html = md.render(markdown);
   return { html, headings };

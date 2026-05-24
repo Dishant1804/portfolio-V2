@@ -6,6 +6,8 @@ export interface Post {
   description?: string;
   excerpt?: string;
   author?: string;
+  tags?: string[];
+  readingTime?: number;
   headings?: Heading[];
   [key: string]: any;
 }
@@ -19,11 +21,6 @@ export interface Heading {
 export interface MarkdownResult {
   html: string;
   headings: Heading[];
-}
-
-export interface NavigationPost {
-  title: string;
-  slug: string;
 }
 
 export interface NavigationPost {

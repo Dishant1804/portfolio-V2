@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="flex flex-col gap-8 text-justify justify-evenly">
+      <header className="flex flex-col gap-6 text-justify justify-evenly">
         {/* <nav className="flex flex-col md:flex-row gap-4 px-4 md:px-10">
           <h3
             className="underline text-[var(--blue-color)] underline-offset-4 cursor-pointer text-sm md:text-base"
@@ -54,14 +54,15 @@ const Header = () => {
               </h1>
               <div className="flex flex-row gap-4">
                 <div className="flex flex-col">
-                  <h1 className="tracking-tight text-base md:text-lg">
-                    Dishant Miyani
+                  <h1 className="tracking-tight text-base">
+                   Hey! I'm Dishant ^_^ <br />
+                   I build things that people use, break and accidentally depend upon :P<br />
                   </h1>
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex gap-2 md:gap-4 flex-wrap py-4">
+          <div className="flex gap-2 md:gap-4 flex-wrap">
             <Link
               className="underline text-[var(--blue-color)] underline-offset-4 text-sm md:text-base"
               href="https://x.com/dishantwt_"

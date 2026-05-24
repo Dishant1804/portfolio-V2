@@ -16,7 +16,7 @@ export default function Landing({ posts }: LandingProps) {
   return (
     <>
       <article className="flex justify-between flex-col flex-wrap text-left font-medium relative">
-        <div className="flex justify-between flex-col gap-8 text-left relative z-10">
+        <div className="flex justify-between flex-col gap-6 text-left relative z-10">
           <Divider />
           <Experience />
           <Divider />
@@ -27,6 +27,7 @@ export default function Landing({ posts }: LandingProps) {
           {/* <TechStack /> */}
           {/* <Divider /> */}
           <Blogs posts={posts} />
+          <Divider />
         </div>
       </article>
     </>
